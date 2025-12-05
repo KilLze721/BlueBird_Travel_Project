@@ -20,20 +20,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoginInfo login(User user) {
         User empLogin = userMapper.getUsernameAndPassword(user);
-        if(empLogin != null){
-            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), null);
-            return loginInfo;
-        }
-        //jwt令牌以后再说
-//        if (empLogin != null) {
-//            Map<String,Object> dataMap = new HashMap<>();
-//            dataMap.put("id", empLogin.getId());
-//            dataMap.put("username", empLogin.getUsername());
-//            String jwt = JwtUtils.generateJwt(dataMap);
-//            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), jwt);
+        //登录基础功能
+//        if(empLogin != null){
+//            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), null);
 //            return loginInfo;
 //        }
-
+        //jwt令牌以后再说
+        if (empLogin != null) {
+            Map<String,Object> dataMap = new HashMap<>();
+            dataMap.put("id", empLogin.getId());
+            dataMap.put("username", empLogin.getUsername());
+            String jwt = JwtUtils.generateJwt(dataMap);
+            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getName(), jwt);
+            return loginInfo;
+        }
         return null;
     }
 }

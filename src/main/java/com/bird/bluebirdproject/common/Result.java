@@ -1,52 +1,35 @@
 package com.bird.bluebirdproject.common;
 
+import lombok.Data;
+
 /**
  * 通用返回结果类
  */
-public class Result {
-    private Integer code; // 状态码
-    private String message; // 返回信息
-    private Object data; // 数据
+@Data
+public class Result<T> {
+    private int code;
+    private String msg;
+    private T data;
 
-    public Result() {}
-
-    public static Result success(Object data) {
-        Result result = new Result();
-        result.code = 200;
-        result.message = "success";
-        result.data = data;
-        return result;
+    public static <T> Result<T> success(String msg) {
+        Result<T> r = new Result<>();
+        r.setCode(0);
+        r.setMsg(msg);
+        return r;
     }
 
-    public static Result error(String message) {
-        Result result = new Result();
-        result.code = 500;
-        result.message = message;
-        return result;
+    public static <T> Result<T> success(T data) {
+        Result<T> r = new Result<>();
+        r.setCode(200);
+        r.setMsg("success");
+        r.setData(data);
+        return r;
     }
 
-    // Getters and Setters
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
+    public static <T> Result<T> error(String error) {
+        Result<T> r = new Result<>();
+        r.setCode(500);
+        r.setMsg(error);
+        return r;
     }
 }

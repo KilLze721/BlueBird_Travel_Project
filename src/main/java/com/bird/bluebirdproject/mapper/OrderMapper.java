@@ -12,4 +12,8 @@ public interface OrderMapper {
     void insert(Order order);
 
     List<MyOrderVO> selectMyOrders(@Param("userId") Integer userId);
+
+    Order selectById(@Param("id") Integer id);
+
+    void updateStatus(@Param("id") Integer id, @Param("status") String status);
 }

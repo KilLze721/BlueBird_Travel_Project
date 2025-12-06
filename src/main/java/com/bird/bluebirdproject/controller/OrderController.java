@@ -26,4 +26,9 @@ public class OrderController {
     ) {
         return orderService.getMyOrders(page, size);
     }
+
+    @PutMapping("/{id}/cancel")
+    public Result cancelOrder(@PathVariable Integer id) {
+        return orderService.cancelOrder(id);
+    }
 }

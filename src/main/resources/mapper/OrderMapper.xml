@@ -24,4 +24,13 @@
         ORDER BY o.id DESC
     </select>
 
+    <select id="selectById" resultType="com.bird.bluebirdproject.pojo.Order">
+        SELECT * FROM order_info WHERE id = #{id}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE order_info
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
 </mapper>

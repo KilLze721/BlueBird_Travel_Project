@@ -9,5 +9,7 @@ public interface OrderService {
     Result create(OrderCreateDTO dto, HttpServletRequest request);
 
     Result getMyOrders(Integer page, Integer size);
+
+    Result cancelOrder(Integer orderId);
 }
 

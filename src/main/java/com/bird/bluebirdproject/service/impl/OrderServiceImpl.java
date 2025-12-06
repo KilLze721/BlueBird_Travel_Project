@@ -81,4 +81,32 @@ public class OrderServiceImpl implements OrderService {
 
         return Result.success(data);
     }
+
+    @Override
+    public Result cancelOrder(Integer orderId) {
+        // 1. 获取当前登录用户
+        Integer userId = UserContext.getUserId();
+        if (userId == null) {
+            return Result.error("未登录");
+        }
+
+        // 2. 查询订单是否属于用户
+        Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            return Result.error("订单不存在");
+        }
+        // 3. 确保订单是当前用户的
+        if (!order.getUserId().equals(userId)) {
+            return Result.error("无权取消此订单");
+        }
+
+        // 4. 订单必须为 “已预订”
+        if (!"已预订".equals(order.getStatus())) {
+            return Result.error("该订单不可取消");
+        }
+
+        // 4. 执行取消
+        orderMapper.updateStatus(orderId, "已取消");
+        return Result.success("订单已取消");
+    }
 }

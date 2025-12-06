@@ -1,15 +1,12 @@
 package com.bird.bluebirdproject.controller;
 
 import com.bird.bluebirdproject.common.Result;
-import com.bird.bluebirdproject.vo.LoginVO;
+import com.bird.bluebirdproject.pojo.Login;
 import com.bird.bluebirdproject.pojo.User;
 import com.bird.bluebirdproject.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -22,9 +19,9 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestBody User user){
         log.info("用户登录 , {}", user);
-        LoginVO loginVo = userService.login(user);
-        if(loginVo != null){
-            return Result.success(loginVo);
+        Login login = userService.login(user);
+        if(login != null){
+            return Result.success(login);
         }
         return Result.error("用户名或密码错误");
     }

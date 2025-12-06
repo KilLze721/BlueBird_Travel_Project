@@ -1,5 +1,6 @@
 package com.bird.bluebirdproject.interceptor;
 
+import com.bird.bluebirdproject.config.UserContext;
 import com.bird.bluebirdproject.util.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,43 +9,47 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.util.Map;
+
 @Slf4j
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //1. 获取请求url。
-        String url = request.getRequestURL().toString();
+        // 从 header 获取 token
+        String token = request.getHeader("token");
 
-        //2. 判断请求url中是否包含login，如果包含，说明是登录操作，放行。
-        if(url.contains("login")){
-            log.info("登录请求 , 直接放行");
-            return true;
+        // 支持从 URL 获取 token
+        if ((token == null || token.isEmpty()) && request.getParameter("token") != null) {
+            token = request.getParameter("token");
         }
 
-        //3. 获取请求头中的令牌（token）。
-        String jwt = request.getHeader("token");
-
-        //4. 判断令牌是否存在，如果不存在，返回错误结果（未登录）。
-        if(!StringUtils.hasLength(jwt)){
-            log.info("获取到jwt令牌为空, 返回错误结果");
+        // token 为空则返回 401
+        if (token == null || token.isEmpty()) {
             response.setStatus(401);
             return false;
         }
 
-        //5. 解析token，如果解析失败，返回错误结果（未登录）。
         try {
-            JwtUtils.parseJWT(jwt);
+            // 解析 token
+            Map<String, Object> claims = JwtUtils.parseJWT(token);
+            Integer userId = (Integer) claims.get("id");
+            // 保存 userId 到 ThreadLocal
+            UserContext.setUserId(userId);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info("解析令牌失败, 返回错误结果");
+            log.error("Token 校验失败: {}", e.getMessage());
             response.setStatus(401);
             return false;
         }
+    }
 
-        //6. 放行。
-        log.info("令牌合法, 放行");
-        return true;
+    @Override
+    public void afterCompletion(HttpServletRequest request,
+                                HttpServletResponse response,
+                                Object handler,
+                                Exception ex) throws Exception {
+        UserContext.clear();
     }
 
 }

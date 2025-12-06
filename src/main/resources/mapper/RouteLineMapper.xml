@@ -17,4 +17,8 @@
             </if>
         </where>
     </select>
+
+    <select id="selectById" resultType="com.bird.bluebirdproject.pojo.RouteLine">
+        SELECT * FROM route_line WHERE id = #{id}
+    </select>
 </mapper>

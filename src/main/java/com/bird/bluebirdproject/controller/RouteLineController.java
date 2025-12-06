@@ -3,10 +3,7 @@ package com.bird.bluebirdproject.controller;
 import com.bird.bluebirdproject.common.Result;
 import com.bird.bluebirdproject.service.RouteLineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/route")
@@ -25,5 +22,13 @@ public class RouteLineController {
             @RequestParam(required = false) Integer typeId) {
 
         return routeLineService.getRouteList(page, size, name, typeId);
+    }
+
+    /**
+     * 线路详情
+     */
+    @GetMapping("/lines/{id}")
+    public Result detail(@PathVariable Integer id) {
+        return routeLineService.getDetail(id);
     }
 }

@@ -2,6 +2,7 @@ package com.bird.bluebirdproject.service.impl;
 
 import com.bird.bluebirdproject.common.Result;
 import com.bird.bluebirdproject.mapper.RouteLineMapper;
+import com.bird.bluebirdproject.pojo.RouteLine;
 import com.bird.bluebirdproject.service.RouteLineService;
 import com.bird.bluebirdproject.vo.RouteLineVO;
 import com.github.pagehelper.PageHelper;
@@ -33,4 +34,15 @@ public class RouteLineServiceImpl implements RouteLineService {
 
         return Result.success(data);
     }
+
+    @Override
+    public Result getDetail(Integer id) {
+        RouteLine route = routeLineMapper.selectById(id);
+        if (route == null) {
+            return Result.error("线路不存在");
+        }
+        return Result.success(route);
+    }
+
+
 }

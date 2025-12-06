@@ -15,6 +15,17 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册自定义拦截器对象
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(tokenInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                "/user/login",
+                "/user/register",
+                "/route/lines",
+                "/route/lines/*",
+                "/doc.html",
+                "/webjars/**",
+                "/swagger-resources/**",
+                "/v3/**"
+        );
     }
 }

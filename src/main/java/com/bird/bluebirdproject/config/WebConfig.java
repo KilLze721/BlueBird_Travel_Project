@@ -8,10 +8,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    //拦截器对象
+
     @Autowired
     private TokenInterceptor tokenInterceptor;
 
+    /**
+     * 添加拦截器到Spring MVC配置中
+     * @param registry 拦截器注册中心
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册自定义拦截器对象

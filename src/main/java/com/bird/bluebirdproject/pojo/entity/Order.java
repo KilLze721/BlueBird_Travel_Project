@@ -1,9 +1,12 @@
-package com.bird.bluebirdproject.pojo;
+package com.bird.bluebirdproject.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 订单实体类
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

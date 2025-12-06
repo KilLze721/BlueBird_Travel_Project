@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 线路列表
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

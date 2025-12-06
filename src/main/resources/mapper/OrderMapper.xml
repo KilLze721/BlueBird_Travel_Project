@@ -4,11 +4,13 @@
 
 <mapper namespace="com.bird.bluebirdproject.mapper.OrderMapper">
 
+    <!--  订单添加  -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO order_info (user_id, line_id, play_date, quantity, price, status)
         VALUES (#{userId}, #{lineId}, #{playDate}, #{quantity}, #{price}, #{status})
     </insert>
 
+    <!--  订单查询  -->
     <select id="selectMyOrders" resultType="com.bird.bluebirdproject.pojo.vo.MyOrderVO">
         SELECT
             o.id AS orderId,
@@ -24,13 +26,16 @@
         ORDER BY o.id DESC
     </select>
 
-    <select id="selectById" resultType="com.bird.bluebirdproject.pojo.Order">
+    <!--  订单id查询  -->
+    <select id="selectById" resultType="com.bird.bluebirdproject.pojo.entity.Order">
         SELECT * FROM order_info WHERE id = #{id}
     </select>
 
+    <!--  订单状态更新  -->
     <update id="updateStatus">
         UPDATE order_info
         SET status = #{status}
         WHERE id = #{id}
     </update>
+
 </mapper>

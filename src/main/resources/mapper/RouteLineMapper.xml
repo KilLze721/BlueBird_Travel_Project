@@ -3,7 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bird.bluebirdproject.mapper.RouteLineMapper">
-    <!-- 列表查询（PageHelper 自动分页） -->
+
+    <!-- 列表查询 -->
     <select id="selectList" resultType="com.bird.bluebirdproject.pojo.vo.RouteLineVO">
         select r.id, r.name, r.price, r.level, r.image,
         t.name AS typeName
@@ -18,7 +19,9 @@
         </where>
     </select>
 
-    <select id="selectById" resultType="com.bird.bluebirdproject.pojo.RouteLine">
+    <!--  列表id查询  -->
+    <select id="selectById" resultType="com.bird.bluebirdproject.pojo.entity.RouteLine">
         SELECT * FROM route_line WHERE id = #{id}
     </select>
+
 </mapper>

@@ -1,4 +1,4 @@
-package com.bird.bluebirdproject.pojo;
+package com.bird.bluebirdproject.pojo.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -6,16 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *  用户数据
+ *  用户实体类
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     private Integer id;
-    /**
-     * 昵称
-     */
     private String name;
     private String username;
     private String password;

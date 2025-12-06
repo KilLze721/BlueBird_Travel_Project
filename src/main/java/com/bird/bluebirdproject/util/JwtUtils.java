@@ -10,8 +10,9 @@ import java.util.Map;
 public class JwtUtils {
 
     private static String signKey = "Qmx1ZUJpcmQ=";
-
-    // 7天
+    /**
+     * 令牌有效期（7天）
+     */
     private static final long expire = 1000L * 60 * 60 * 24 * 7;
 
     /**

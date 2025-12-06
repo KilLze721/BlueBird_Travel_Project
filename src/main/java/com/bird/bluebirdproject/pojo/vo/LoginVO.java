@@ -1,4 +1,4 @@
-package com.bird.bluebirdproject.pojo;
+package com.bird.bluebirdproject.pojo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Login {
-    private Integer id; //ID
-    private String name; //昵称
-    private String token; //令牌
+public class LoginVO {
+    private Integer id;
+    private String name;
+    private String token;
 }

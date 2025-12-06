@@ -9,4 +9,19 @@
         VALUES (#{userId}, #{lineId}, #{playDate}, #{quantity}, #{price}, #{status})
     </insert>
 
+    <select id="selectMyOrders" resultType="com.bird.bluebirdproject.pojo.vo.MyOrderVO">
+        SELECT
+            o.id AS orderId,
+            r.name AS lineName,
+            r.image AS image,
+            o.play_date AS playDate,
+            o.quantity AS quantity,
+            o.price AS price,
+            o.status AS status
+        FROM order_info o
+        LEFT JOIN route_line r ON o.line_id = r.id
+        WHERE o.user_id = #{userId}
+        ORDER BY o.id DESC
+    </select>
+
 </mapper>

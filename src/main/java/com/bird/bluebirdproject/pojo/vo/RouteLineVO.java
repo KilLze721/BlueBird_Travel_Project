@@ -1,4 +1,4 @@
-package com.bird.bluebirdproject.vo;
+package com.bird.bluebirdproject.pojo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

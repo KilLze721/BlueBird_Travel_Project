@@ -4,7 +4,7 @@ import com.bird.bluebirdproject.common.Result;
 import com.bird.bluebirdproject.mapper.RouteLineMapper;
 import com.bird.bluebirdproject.pojo.RouteLine;
 import com.bird.bluebirdproject.service.RouteLineService;
-import com.bird.bluebirdproject.vo.RouteLineVO;
+import com.bird.bluebirdproject.pojo.vo.RouteLineVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

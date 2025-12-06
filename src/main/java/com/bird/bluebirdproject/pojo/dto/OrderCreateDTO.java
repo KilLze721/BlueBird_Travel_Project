@@ -1,4 +1,4 @@
-package com.bird.bluebirdproject.dto;
+package com.bird.bluebirdproject.pojo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

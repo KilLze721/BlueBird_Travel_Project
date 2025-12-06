@@ -1,7 +1,7 @@
 package com.bird.bluebirdproject.mapper;
 
 import com.bird.bluebirdproject.pojo.RouteLine;
-import com.bird.bluebirdproject.vo.RouteLineVO;
+import com.bird.bluebirdproject.pojo.vo.RouteLineVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

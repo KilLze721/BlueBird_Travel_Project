@@ -4,7 +4,7 @@
 
 <mapper namespace="com.bird.bluebirdproject.mapper.RouteLineMapper">
     <!-- 列表查询（PageHelper 自动分页） -->
-    <select id="selectList" resultType="com.bird.bluebirdproject.vo.RouteLineVO">
+    <select id="selectList" resultType="com.bird.bluebirdproject.pojo.vo.RouteLineVO">
         select r.id, r.name, r.price, r.level, r.image,
         t.name AS typeName
         from route_line r left join route_type t on r.type_id = t.id

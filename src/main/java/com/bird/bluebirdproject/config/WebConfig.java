@@ -22,14 +22,18 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(
-                "/user/login",
-                "/user/register",
-                "/route/lines",
-                "/route/lines/*",
-                "/doc.html",
-                "/webjars/**",
-                "/swagger-resources/**",
-                "/v3/**"
+                        "/user/login",
+                        "/user/register",
+                        "/route/lines",
+                        "/route/lines/*",
+                        "/doc.html",
+                        "/webjars/**",
+                        "/swagger-resources/**",
+                        "/v3/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/swagger-resources/**",
+                        "/webjars/**"
         );
     }
 }

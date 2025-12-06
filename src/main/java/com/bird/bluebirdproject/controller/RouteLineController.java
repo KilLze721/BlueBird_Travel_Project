@@ -2,6 +2,8 @@ package com.bird.bluebirdproject.controller;
 
 import com.bird.bluebirdproject.common.Result;
 import com.bird.bluebirdproject.service.RouteLineService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * 旅游线路控制器类
  * 处理旅游线路相关的HTTP请求，包括线路列表展示和线路详情查看等功能
  */
+@Tag(name = "旅游线路接口")
 @RestController
 @RequestMapping("/route")
 public class RouteLineController {
@@ -24,6 +27,7 @@ public class RouteLineController {
      * @param typeId 线路类型ID
      * @return 线路列表及分页信息
      */
+    @Operation(summary = "获取线路列表")
     @GetMapping("/lines")
     public Result list(
             @RequestParam(defaultValue = "1") Integer page,
@@ -40,6 +44,7 @@ public class RouteLineController {
      * @param id 线路ID
      * @return 线路详细信息
      */
+    @Operation(summary = "获取线路详情")
     @GetMapping("/lines/{id}")
     public Result detail(@PathVariable Integer id) {
         return routeLineService.getDetail(id);

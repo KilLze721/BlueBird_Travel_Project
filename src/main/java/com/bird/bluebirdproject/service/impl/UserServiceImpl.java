@@ -1,7 +1,7 @@
 package com.bird.bluebirdproject.service.impl;
 
 import com.bird.bluebirdproject.mapper.UserMapper;
-import com.bird.bluebirdproject.pojo.LoginInfo;
+import com.bird.bluebirdproject.vo.LoginVo;
 import com.bird.bluebirdproject.pojo.User;
 import com.bird.bluebirdproject.service.UserService;
 import com.bird.bluebirdproject.util.JwtUtils;
@@ -18,21 +18,15 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public LoginInfo login(User user) {
+    public LoginVo login(User user) {
         User empLogin = userMapper.getUsernameAndPassword(user);
-        //登录基础功能
-//        if(empLogin != null){
-//            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), null);
-//            return loginInfo;
-//        }
-        //jwt令牌以后再说
         if (empLogin != null) {
             Map<String,Object> dataMap = new HashMap<>();
             dataMap.put("id", empLogin.getId());
             dataMap.put("username", empLogin.getUsername());
             String jwt = JwtUtils.generateJwt(dataMap);
-            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getName(), jwt);
-            return loginInfo;
+            LoginVo loginVo = new LoginVo(empLogin.getId(), empLogin.getName(), jwt);
+            return loginVo;
         }
         return null;
     }

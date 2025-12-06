@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bluebird.mapper.RouteLineMapper">
+    <!-- 列表查询（PageHelper 自动分页） -->
+    <select id="selectList" resultType="com.bird.bluebirdproject.vo.RouteLineVo">
+        select  r.id, r.name, r.price, r.level, r.image,
+        t.name AS typeName
+        from route_line r left join route_type t on r.type_id = t.id
+        <where>
+            <if test="name != null and name != ''">
+                and r.name like concat('%',${name},'%')
+            </if>
+            <if test="typeId != null">
+                and r.type_id = ${typeId}
+            </if>
+        </where>
+    </select>
+</mapper>

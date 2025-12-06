@@ -1,22 +1,18 @@
 package com.bird.bluebirdproject.pojo;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *  用户数据
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class RouteLine {
     private Integer id;
-    /**
-     * 昵称
-     */
     private String name;
-    private String username;
-    private String password;
+    private Double price;
+    private String level;
+    private String image;
+    private String descText;
+    private Integer typeId;
 }

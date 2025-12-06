@@ -1,7 +1,7 @@
 package com.bird.bluebirdproject.controller;
 
 import com.bird.bluebirdproject.common.Result;
-import com.bird.bluebirdproject.vo.LoginVo;
+import com.bird.bluebirdproject.vo.LoginVO;
 import com.bird.bluebirdproject.pojo.User;
 import com.bird.bluebirdproject.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestBody User user){
         log.info("用户登录 , {}", user);
-        LoginVo loginVo = userService.login(user);
+        LoginVO loginVo = userService.login(user);
         if(loginVo != null){
             return Result.success(loginVo);
         }

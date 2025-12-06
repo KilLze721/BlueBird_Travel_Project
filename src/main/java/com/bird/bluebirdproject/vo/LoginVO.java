@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginVo {
+public class LoginVO {
     private Integer id; //ID
     private String name; //昵称
     private String token; //令牌

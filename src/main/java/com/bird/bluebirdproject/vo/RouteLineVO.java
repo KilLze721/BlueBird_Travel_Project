@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RouteLineVo {
+public class RouteLineVO {
     private Integer id;
     private String name;
     private Double price;

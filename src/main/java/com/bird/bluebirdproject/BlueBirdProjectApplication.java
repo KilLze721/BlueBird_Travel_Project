@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan
-@MapperScan("com.bird.bluebirdproject.mapper")
 public class BlueBirdProjectApplication {
 
     public static void main(String[] args) {

@@ -2,6 +2,7 @@ package com.bird.bluebirdproject.interceptor;
 
 import com.bird.bluebirdproject.config.UserContext;
 import com.bird.bluebirdproject.util.JwtUtils;
+import com.bird.bluebirdproject.util.TokenAuthUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -32,21 +33,9 @@ public class TokenInterceptor implements HandlerInterceptor {
         // 从 header 获取 token
         String token = request.getHeader("token");
 
-        // 支持从 URL 获取 token
-        if ((token == null || token.isEmpty()) && request.getParameter("token") != null) {
-            token = request.getParameter("token");
-        }
-
-        // token 为空则返回 401
-        if (token == null || token.isEmpty()) {
-            response.setStatus(401);
-            return false;
-        }
-
         try {
-            // 解析 token
-            Map<String, Object> claims = JwtUtils.parseJWT(token);
-            Integer userId = (Integer) claims.get("id");
+            // 调用TokenAuthUtil类验证和解析token
+            Integer userId = TokenAuthUtil.checkAndGetUserId(token);
             // 保存 userId 到 ThreadLocal
             UserContext.setUserId(userId);
             return true;
@@ -67,10 +56,7 @@ public class TokenInterceptor implements HandlerInterceptor {
      * @throws Exception 异常
      */
     @Override
-    public void afterCompletion(HttpServletRequest request,
-                                HttpServletResponse response,
-                                Object handler,
-                                Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         UserContext.clear();
     }
 

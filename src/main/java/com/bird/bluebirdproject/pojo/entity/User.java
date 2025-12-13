@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  *  用户实体类
+ * @author lenovo
  */
 @Data
 @NoArgsConstructor

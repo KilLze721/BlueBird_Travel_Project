@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 线路实体类
+ * @author lenovo
  */
 @Data
 @NoArgsConstructor

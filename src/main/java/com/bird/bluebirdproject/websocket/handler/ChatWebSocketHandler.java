@@ -1,6 +1,7 @@
 package com.bird.bluebirdproject.websocket.handler;
 
-import com.bird.bluebirdproject.websocket.model.ChatMessage;
+import com.bird.bluebirdproject.service.ChatMessageService;
+import com.bird.bluebirdproject.websocket.model.ChatMessageWs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private ChatMessageService chatMessageService;
     // 在线用户：userId -> session
     private static final Map<Integer, WebSocketSession> ONLINE_USERS = new ConcurrentHashMap<>();
 
@@ -43,18 +47,19 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
         // 解析消息
-        ChatMessage chat = objectMapper.readValue(
+        ChatMessageWs wsMsg = objectMapper.readValue(
                 message.getPayload(),
-                ChatMessage.class
+                ChatMessageWs.class
         );
         // 补充服务器字段
-        chat.setTime(LocalDateTime.now());
-        // 找到接收方
-        WebSocketSession toSession = ONLINE_USERS.get(chat.getToUserId());
-        // 消息转发
+        wsMsg.setTime(LocalDateTime.now());
+        // 将消息保存到数据库
+        chatMessageService.saveMessage(wsMsg);
+        // 发送实时消息
+        WebSocketSession toSession = ONLINE_USERS.get(wsMsg.getToUserId());
         if (toSession != null && toSession.isOpen()) {
             toSession.sendMessage(
-                    new TextMessage(objectMapper.writeValueAsString(chat))
+                    new TextMessage(objectMapper.writeValueAsString(wsMsg))
             );
         }
     }

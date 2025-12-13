@@ -20,6 +20,15 @@ import java.util.Map;
 @Slf4j
 @Component
 public class WsAuthInterceptor implements HandshakeInterceptor {
+    /**
+     * 拦截WebSocket连接请求
+     * @param request
+     * @param response
+     * @param wsHandler
+     * @param attributes
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         // 从请求URL中提取token参数

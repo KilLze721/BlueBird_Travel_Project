@@ -1,13 +1,11 @@
 package com.bird.bluebirdproject.interceptor;
 
 import com.bird.bluebirdproject.config.UserContext;
-import com.bird.bluebirdproject.util.JwtUtils;
 import com.bird.bluebirdproject.util.TokenAuthUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Map;

@@ -19,9 +19,8 @@ public interface ChatMessageService {
 
     /**
      * 获取聊天记录
-     * @param userId
-     * @param targetId
+     * @param targetUserId
      * @return
      */
-    List<ChatMessage> getHistory(Integer userId, Integer targetId);
+    List<ChatMessage> getHistory(Integer targetUserId);
 }

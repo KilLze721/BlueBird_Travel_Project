@@ -1,5 +1,6 @@
 package com.bird.bluebirdproject.service.impl;
 
+import com.bird.bluebirdproject.config.UserContext;
 import com.bird.bluebirdproject.mapper.ChatMessageMapper;
 import com.bird.bluebirdproject.pojo.entity.ChatMessage;
 import com.bird.bluebirdproject.service.ChatMessageService;
@@ -23,7 +24,9 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     public void saveMessage(ChatMessageWs wsMsg) {
         // 转换WebSocket消息对象为数据库实体对象
         ChatMessage entity = new ChatMessage();
-        entity.setFromUserId(wsMsg.getFromUserId());
+        // 从用户上下文获取用户ID(发送人ID)
+        Integer userId = UserContext.getUserId();
+        entity.setFromUserId(userId);
         entity.setToUserId(wsMsg.getToUserId());
         entity.setContent(wsMsg.getContent());
         entity.setCreateTime(wsMsg.getTime());
@@ -32,13 +35,16 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     }
 
     /**
-     * 获取聊天历史记录
-     * @param userId 用户ID
-     * @param targetId 目标用户ID
-     * @return 聊天历史记录列表
+     * 获取聊天记录
+     * @param targetUserId
+     * @return
      */
     @Override
-    public List<ChatMessage> getHistory(Integer userId, Integer targetId) {
-        return chatMessageMapper.selectHistory(userId, targetId);
+    public List<ChatMessage> getHistory(Integer targetUserId) {
+        Integer userId = UserContext.getUserId();
+        if (userId == null) {
+            throw new RuntimeException("未登录");
+        }
+        return chatMessageMapper.selectHistory(userId, targetUserId);
     }
 }

@@ -1,5 +1,9 @@
 package com.bird.bluebirdproject.config;
 
+/**
+ * 用户上下文类
+ * @author lenovo
+ */
 public class UserContext {
 
     private static final ThreadLocal<Integer> userHolder = new ThreadLocal<>();
